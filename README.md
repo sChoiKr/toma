@@ -13,7 +13,7 @@ Each `mᵢ` is a manifold contribution: a point sampled from a low-dimensional s
 - **`toma`** — synthetic benchmark: manifold zoo, DGP, four pre-defined scales (SMALL → GIANT), and ground-truth recovery metrics.
 - **`toma.bsf`** — block-sparse featurizers: `VanillaBSF` (free encoder + block TopK) and `GrassmannianBSF` (tied orthonormal frames + block TopK). One trainer works for both.
 
-> **Start here:** the notebooks in [`runs/small/`](runs/small/) — `01_block`, `02_grassmannian`, `03_sae` — end-to-end walkthroughs: manifold zoo viz, training, recovery metrics, and a 3-D recovery figure. `03_sae` trains a classical SAE (one atom per block) as a baseline for the two block-sparse featurizers.
+> **Start here:** [`runs/small/compare.ipynb`](runs/small/compare.ipynb) trains `VanillaBSF`, `GrassmannianBSF` and a classical SAE baseline (one atom per block) on the same data, then shows the manifold zoo, a table of recovery scores, per-concept curves and a 3-D recovery figure.
 
 ---
 
@@ -26,7 +26,7 @@ pip install -e .          # installs the `toma` package (and deps)
 ```
 
 Now `import toma` works from anywhere. `bsf` is the `toma.bsf` submodule, so the
-notebooks under `runs/` just do `import toma` / `from toma import bsf`.
+notebook under `runs/` just does `import toma` / `from toma import bsf`.
 
 ---
 
@@ -160,9 +160,7 @@ toma/
     grassmannian.py  GrassmannianBSF — orthonormal frames + block TopK
     train.py         featurizer-agnostic trainer + recon_r2
 runs/small/
-  01_block.ipynb          end-to-end: VanillaBSF
-  02_grassmannian.ipynb   end-to-end: GrassmannianBSF
-  03_sae.ipynb            end-to-end: classical SAE baseline (ReLU + TopK, group_size=1)
+  compare.ipynb    VanillaBSF vs GrassmannianBSF vs classical SAE (ReLU + TopK, group_size=1)
 ```
 
 Everything runs on CPU; a GPU just makes training faster.
