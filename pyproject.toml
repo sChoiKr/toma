@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "toma"
+version = "0.1.0"
+description = "Toy model of manifolds (TOMA) — a benchmark for block-sparse featurizers (dgp, metrics, bsf)."
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = ["torch", "numpy", "matplotlib"]
+
+[project.optional-dependencies]
+dev = ["nbformat"]   # only needed to (re)build the starter / runs notebooks
+
+[tool.setuptools]
+packages = ["toma", "toma.bsf"]   # one package; bsf is the toma.bsf submodule
