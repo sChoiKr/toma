@@ -147,6 +147,20 @@ Also available for atom-level (non-block) scoring: `oracle_k_r2` and `component_
 
 ---
 
+## results
+
+From `runs/small/compare.ipynb`: `d=128`, `M=128` concepts (half curved), `l0=4`, 300k training and 30k test samples, seed 0, CPU. One seed; variation across seeds is not measured.
+
+| model | recon R² | concept R² | concept F1 | dead units |
+|---|---|---|---|---|
+| `VanillaBSF` | 0.956 | 0.925 | 0.842 | 128 / 256 groups |
+| `GrassmannianBSF` | 0.913 | 0.858 | 0.817 | 155 / 320 groups |
+| classical SAE | 0.961 | −0.925 | 0.505 | 6 / 512 atoms |
+
+Concept R² and F1 are group-oracle R² and group F1 for the two block models, and `oracle_k_r2` and `component_f1` for the SAE. Dead units never fire on a 20k training subsample after the last epoch. The SAE reconstructs `x` best but has negative per-concept R²: no single atom tracks a curved concept.
+
+---
+
 ## layout
 
 ```
