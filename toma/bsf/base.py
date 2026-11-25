@@ -1,4 +1,4 @@
-"""Shared base for the three block-sparse featurizers."""
+"""Shared base for the block-sparse featurizers."""
 import torch
 import torch.nn as nn
 

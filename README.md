@@ -11,9 +11,9 @@ x = Σᵢ mᵢ + ε
 Each `mᵢ` is a manifold contribution: a point sampled from a low-dimensional shape (circle, sphere, torus, …) and embedded in ℝᵈ via a random orthonormal map. ~70 % of components are `Concept` atoms (1-D line segments, classic dictionary learning); the rest are drawn from the curved manifold zoo. Only `l0` components are active per sample.
 
 - **`toma`** — synthetic benchmark: manifold zoo, DGP, four pre-defined scales (SMALL → GIANT), and ground-truth recovery metrics.
-- **`toma.bsf`** — block-sparse featurizers: `VanillaBSF` (free encoder + block TopK), `GrassmannianBSF` (tied orthonormal frames + block TopK), and `GroupLassoBSF` (thresholded block gate, learned θ). One trainer works for all three.
+- **`toma.bsf`** — block-sparse featurizers: `VanillaBSF` (free encoder + block TopK) and `GrassmannianBSF` (tied orthonormal frames + block TopK). One trainer works for both.
 
-> **Start here:** the per-featurizer notebooks in [`runs/small/`](runs/small/) — `01_block`, `02_grassmannian`, `03_group_lasso`, `04_sae` — end-to-end walkthroughs: manifold zoo viz, training, recovery metrics, and a 3-D recovery figure.
+> **Start here:** the notebooks in [`runs/small/`](runs/small/) — `01_block`, `02_grassmannian`, `03_sae` — end-to-end walkthroughs: manifold zoo viz, training, recovery metrics, and a 3-D recovery figure. `03_sae` trains a classical SAE (one atom per block) as a baseline for the two block-sparse featurizers.
 
 ---
 
@@ -22,7 +22,7 @@ Each `mᵢ` is a manifold contribution: a point sampled from a low-dimensional s
 ```bash
 git clone https://github.com/sChoiKr/toma
 cd toma
-pip install -e .          # installs the `toma` + `bsf` packages (and deps)
+pip install -e .          # installs the `toma` package (and deps)
 ```
 
 Now `import toma` works from anywhere. `bsf` is the `toma.bsf` submodule, so the
@@ -158,13 +158,11 @@ toma/
     base.py          abstract BSF (decode / forward / atoms / block ops)
     vanilla.py       VanillaBSF   — free encoder + block TopK
     grassmannian.py  GrassmannianBSF — orthonormal frames + block TopK
-    group_lasso.py   GroupLassoBSF — thresholded block gate (learned θ)
     train.py         featurizer-agnostic trainer + recon_r2
 runs/small/
   01_block.ipynb          end-to-end: VanillaBSF
   02_grassmannian.ipynb   end-to-end: GrassmannianBSF
-  03_group_lasso.ipynb    end-to-end: GroupLassoBSF
-  04_sae.ipynb            end-to-end: classical SAE (the foil)
+  03_sae.ipynb            end-to-end: classical SAE baseline (ReLU + TopK, group_size=1)
 ```
 
 Everything runs on CPU; a GPU just makes training faster.
